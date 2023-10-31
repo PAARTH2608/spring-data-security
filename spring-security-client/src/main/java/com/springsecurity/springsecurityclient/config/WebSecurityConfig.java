@@ -25,8 +25,15 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(request -> {
                     request.requestMatchers("/register").permitAll();
                     request.requestMatchers("/verifyRegistration").permitAll();
-
-                }).formLogin(Customizer.withDefaults());
+                    request.requestMatchers("/resendVerifyToken").permitAll();
+                    request.requestMatchers("/resetPassword").permitAll();
+                    request.requestMatchers("/savePassword").permitAll();
+                    request.requestMatchers("/api/**").authenticated();
+                }).oauth2Login(
+                        oauth2login -> oauth2login.loginPage("/oauth2/authorization/api-client-oidc")
+                )
+                .oauth2Client(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults());
         return httpSecurity.build();
     }
 }
