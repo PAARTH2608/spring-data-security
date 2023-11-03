@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    // without this we wont be able to use bean method and passwordEncoder will show error
+    // without this we won't be able to use bean method and passwordEncoder will show error
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(11);
